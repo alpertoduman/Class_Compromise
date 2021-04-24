@@ -1,0 +1,93 @@
+---
+title: "Class Compromise"
+author: Alper Duman
+date: 04/24/2021
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Joan Robinson famously claimed that worse than being exploited is not-to-be exploited.
+A worker is exploited while she works.
+An unemployed worker is not exploited.
+The downside is she has no income.
+Generalizing this observation to the whole economy we can grasp the structural dependence of
+workers on capitalists.
+Unless the capitalists invest and demand workers for exploitation and generation of surplus value, workers have no wage income. 
+Since the capitalists are the ultimate controllers of means of production, their behavior is pivotal for the dynamics of the capitalist economy. 
+
+# Class Conflict and Compromise
+
+At any given time the total output/income is the sum of wages and profits. 
+
+$Y_{t} = W_{t} + P_{t}$
+
+Assume that the worker will only give their consent and work efficiently if their wages go up following a 
+predetermined path such as
+
+$W_{t}^{d}=W_{t-1} + \alpha P_{t-1}$
+
+where $\alpha$ is the rate of past period profits to be transferred to workers. 
+Obviously $\alpha=1$ reflects a workers' revolution; meaning all the profits are confiscated.
+Therefore $0<\alpha < 1$ is a small but a positive number.
+
+The output on the hand depends on the behaviour of the capitalists.
+
+$Y_{t+1} = W_{t} + (1 + s/k)P_{t}$
+
+where $s$ is the saving rate out of profits and $k$ is the capital-output ratio.
+At the steady state
+
+$W_{t}^{d}=W_{t}$
+
+
+
+
+## Militancy
+
+
+## Saving Rate of the Capitalists
+
+# Dynamic Model
+
+The advanced capitalist economies require $s=0.5$ and $\alpha=0.075$ with an equal split of income initially.
+For Turkey, $s=0.4$ and $\alpha=0.04$ with a 70% profit share initially
+reproduces current outcome of 60% / 40% split for capital 
+and labor respectively.
+
+```{r Y}
+Y <- as.numeric()
+s <- 0.3
+alpha <- 0.03
+#s <- seq(0.01:0.9, by=0.01)
+# r <- seq(0.01:0.9, by=0.01)
+k <- 4
+P0 <- 70
+W0 <- 30
+W <- as.numeric()
+P <- as.numeric()
+```
+
+```{r loop}
+Y[1] <- W0 + (1 + s/k)*P0
+W[1] <- W0 + alpha*P0
+P[1] <- Y[1]-W[1]
+for (i in 2:200) {
+Y[i] <- W[i-1] + (1+s/k)*P[i-1]
+W[i] <- W[i-1] + alpha*P[i-1]
+P[i] <- Y[i]-W[i]
+}
+```
+
+```{r plot}
+plot(log(Y), W/P)
+```
+
+# Conclusion
+
+
